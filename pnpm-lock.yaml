@@ -20,6 +20,9 @@ dependencies:
   mongoose:
     specifier: ^8.3.0
     version: 8.3.0
+  mongoose-timestamp:
+    specifier: ^0.6.0
+    version: 0.6.0
   reflect-metadata:
     specifier: ^0.2.0
     version: 0.2.2
@@ -2077,7 +2080,6 @@ packages:
   /clone@1.0.4:
     resolution: {integrity: sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==}
     engines: {node: '>=0.8'}
-    dev: true
 
   /co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
@@ -2280,7 +2282,6 @@ packages:
     resolution: {integrity: sha512-eFuaLoy/Rxalv2kr+lqMlUnrDWV+3j4pljOIJgLIhI058IQfWJ7vXhyEIHu+HtC738klGALYxOKDO0bQP3tg8A==}
     dependencies:
       clone: 1.0.4
-    dev: true
 
   /define-data-property@1.1.4:
     resolution: {integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==}
@@ -4021,6 +4022,12 @@ packages:
       '@mongodb-js/saslprep': 1.1.5
       bson: 6.6.0
       mongodb-connection-string-url: 3.0.0
+    dev: false
+
+  /mongoose-timestamp@0.6.0:
+    resolution: {integrity: sha512-H0f/x2z7yvIiijP3UaE6bsSTP71WqVxn8GR8OOYKUSWmf+U1mD1K+QeEQ5BlYl6zbp/l/19F8sHXA/vUAyDnRg==}
+    dependencies:
+      defaults: 1.0.4
     dev: false
 
   /mongoose@8.3.0:

@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.8'
 
 services:
   mongo:
@@ -6,6 +6,11 @@ services:
     restart: always
     ports:
       - 27017:27017
+    volumes:
+      - local_db:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+volumes:
+  local_db:
+    name: mongo_db

@@ -16,14 +16,14 @@ import { UpdateCatDto } from './dto/update-cat.dto';
 export class CatController {
   constructor(private readonly catService: CatService) {}
 
-  @Post()
-  create(@Body() createCatDto: CreateCatDto): Promise<Cat> {
-    return this.catService.create(createCatDto);
-  }
-
   @Get()
   findAll(): Promise<Cat[]> {
     return this.catService.findAll();
+  }
+
+  @Post()
+  create(@Body() createCatDto: CreateCatDto): Promise<Cat> {
+    return this.catService.create(createCatDto);
   }
 
   @Get(':id')

@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import * as mongooseTimestamp from 'mongoose-timestamp';
 
 export type CatDocument = Cat & Document;
 
@@ -16,4 +17,5 @@ export class Cat extends Document {
   breed: string;
 }
 
-export const CatSchema = SchemaFactory.createForClass(Cat);
+export const CatSchema =
+  SchemaFactory.createForClass(Cat).plugin(mongooseTimestamp);
