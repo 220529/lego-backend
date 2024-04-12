@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { CatsModule } from './cat/cat.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    CatsModule,
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath:
@@ -27,7 +24,5 @@ import { CatsModule } from './cat/cat.module';
       },
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
