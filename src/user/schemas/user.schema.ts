@@ -1,7 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-// 定义用户模式
+/**
+ * 定义用户模式
+ * 未定义的字段，存不进去
+ */
 @Schema({ timestamps: true })
 export class User extends Document {
   // 用户名
@@ -14,7 +17,19 @@ export class User extends Document {
 
   // 电子邮件（可选）
   @Prop()
-  email?: string;
+  email: string;
+
+  // 昵称
+  @Prop()
+  nickName: string;
+
+  // 角色
+  @Prop()
+  role: string;
+
+  // 肖像
+  @Prop()
+  portrait: string;
 }
 
 // 创建 User 模型

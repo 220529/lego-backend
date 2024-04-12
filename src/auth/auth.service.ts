@@ -42,7 +42,7 @@ export class AuthService {
     const { _id, username } = user;
     return {
       access_token: await this.jwtService.signAsync({
-        _id: _id.toString(),
+        _id,
         username,
       }),
     };
