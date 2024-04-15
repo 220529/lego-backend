@@ -1,16 +1,22 @@
-version: '3.8'
-
 services:
-  mongo:
+  lego-mongo:
     image: mongo
+    container_name: lego-mongo
     restart: always
     ports:
       - 27017:27017
     volumes:
-      - local_db:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-volumes:
-  local_db:
-    name: mongo_db
+      - .docker-volumes/mongo/data:/data/db
+    env_file:
+      - .env.dev
+      # - .env.prod
+  # lego-backend:
+  #   image: lego-backend
+  #   container_name: lego-backend
+  #   depends_on:
+  #     - lego-mongo
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 9000:3000

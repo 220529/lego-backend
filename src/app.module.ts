@@ -16,9 +16,9 @@ import { AuthModule } from './auth/auth.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         return {
-          user: configService.get('ROOT_NAME'),
-          pass: configService.get('ROOT_PASSWORD'),
-          dbName: configService.get('DATABASE'),
+          user: configService.get('MONGO_INITDB_ROOT_USERNAME'),
+          pass: configService.get('MONGO_INITDB_ROOT_PASSWORD'),
+          dbName: configService.get('MONGO_INITDB_DATABASE'),
           uri: `mongodb://${configService.get('HOST')}:${configService.get('PORT')}`,
         };
       },
