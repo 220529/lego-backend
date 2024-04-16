@@ -44,8 +44,8 @@ jobs:
         uses: aliyun/acr-login@v1
         with:
           login-server: https://registry.cn-beijing.aliyuncs.com
-          username: ${{ secrets.ARC_USERNAME }}
-          password: ${{ secrets.ARC_PASSWORD }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Build and push image
         env:
@@ -89,6 +89,7 @@ jobs:
           script_stop: true
           script: |
             cd /app/lego-backend/
-            ls -a
+            docker login --username=${{secrets.ACR_USERNAME}} --password=${{secrets.ACR_PASSWORD}} registry.cn-beijing.aliyuncs.com
             docker compose -f docker-compose-prod.yml down
             docker compose -f docker-compose-prod.yml up -d
+            docker logout registry.cn-hangzhou.aliyuncs.com
