@@ -9,7 +9,7 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath:
-        process.env.NODE_ENV === 'production' ? '.env.prod' : '.env.dev',
+        process.env.NODE_ENV === 'production' ? '.env' : '.env.local',
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],

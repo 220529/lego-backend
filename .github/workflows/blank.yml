@@ -63,3 +63,30 @@ jobs:
           regex: true
 
       - run: cat docker-compose-prod.yml
+
+      - name: 创建配置文件夹
+        run: |
+          mkdir lego-backend
+          ls -a
+          cp .env docker-compose-prod.yml lego-backend
+          cp -r mongo-entrypoint lego-backend
+
+      - name: 将配置文件夹copy到ssh
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: lego-backend
+          target: /app
+
+      - name: 登录ssh
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script_stop: true
+          script: |
+            whoami
+            ls -a
