@@ -58,7 +58,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: '{{IMAGE_TAG}}'
-          replace: $IMAGE_TAG
+          replace: ${{ github.sha }}
           include: docker-compose-prod.yml
           regex: true
 
@@ -88,5 +88,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           script_stop: true
           script: |
-            whoami
+            cd /app/lego-backend/
             ls -a
+            docker-compose -f docker-compose-prod.yml down
+            docker-compose -f docker-compose-prod.yml up -d
