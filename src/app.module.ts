@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
           user: configService.get('MONGO_INITDB_ROOT_USERNAME'),
           pass: configService.get('MONGO_INITDB_ROOT_PASSWORD'),
           dbName: configService.get('MONGO_INITDB_DATABASE'),
-          uri: `mongodb://${configService.get('HOST')}:${configService.get('PORT')}`,
+          uri: `mongodb://${configService.get('MONGO_HOST')}:${configService.get('MONGO_PORT')}`,
         };
       },
     }),

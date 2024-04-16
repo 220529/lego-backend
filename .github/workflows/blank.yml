@@ -1,0 +1,65 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: ['action-acr']
+  pull_request:
+    branches: ['action-acr']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: 查看仓库信息
+        run: |
+          echo 仓库分支：${{github.ref_name}}
+          ls -a
+
+      - name: 创建.env文件
+        run: |
+          touch .env
+          echo MONGO_HOST=${{secrets.MONGO_HOST}} >> .env
+          echo MONGO_PORT=${{secrets.MONGO_PORT}} >> .env
+          echo MONGO_INITDB_DATABASE=${{secrets.MONGO_INITDB_DATABASE}} >> .env
+          echo MONGO_INITDB_ROOT_USERNAME=${{secrets.MONGO_INITDB_ROOT_USERNAME}} >> .env
+          echo MONGO_INITDB_ROOT_PASSWORD=${{secrets.MONGO_INITDB_ROOT_PASSWORD}} >> .env
+          echo JWT_SECRET=${{secrets.JWT_SECRET}} >> .env
+
+      - name: Login to ACR
+        uses: aliyun/acr-login@v1
+        with:
+          login-server: https://registry.cn-beijing.aliyuncs.com
+          username: ${{ secrets.ARC_USERNAME }}
+          password: ${{ secrets.ARC_PASSWORD }}
+
+      - name: Build and push image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t registry.cn-beijing.aliyuncs.com/kaixinliu/lego-backend:$IMAGE_TAG .
+          docker push registry.cn-beijing.aliyuncs.com/kaixinliu/lego-backend:$IMAGE_TAG
+
+      - name: Find and Replace
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: '{{IMAGE_TAG}}'
+          replace: $IMAGE_TAG
+          include: docker-compose-prod.yml
+          regex: true
+
+      - run: cat docker-compose-prod.yml
