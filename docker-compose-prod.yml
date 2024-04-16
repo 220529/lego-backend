@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
   backend:
-    image: registry.cn-beijing.aliyuncs.com/kaixinliu/lego-backend:0.0.3
+    image: registry.cn-beijing.aliyuncs.com/kaixinliu/lego-backend:{{IMAGE_TAG}}
     depends_on:
       - mongo
     ports:
