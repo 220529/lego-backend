@@ -15,7 +15,6 @@ import { WorkService } from './work.service';
 import { CreateWorkDto } from './dto/create-Work.dto';
 import { UpdateWorkDto } from './dto/update-Work.dto';
 import { Work } from './schemas/work.schema';
-import { User } from '../user/schemas/user.schema';
 
 @ApiTags('Work')
 @Controller('Work')
