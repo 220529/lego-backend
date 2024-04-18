@@ -18,7 +18,6 @@ export class AuthService {
     const oldUser = await this.userService.findOneByParams({
       username: user.username,
     });
-
     if (oldUser?.password !== user.password) {
       throw new UnauthorizedException('Invalid username or password');
     }
