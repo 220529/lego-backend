@@ -42,7 +42,7 @@ export class Work extends Document {
 
   // 是否公开
   @Prop()
-  isPublic: boolean;
+  isPublished: boolean;
 }
 
 // 创建 Work 模型

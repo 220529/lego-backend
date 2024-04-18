@@ -35,5 +35,5 @@ export class CreateWorkDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsBoolean()
-  readonly isPublic: boolean;
+  readonly isPublished: boolean;
 }
