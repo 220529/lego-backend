@@ -16,9 +16,13 @@ export class OssController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file) {
-    const { originalname, buffer } = file;
+    const { originalname, buffer, mimetype } = file;
     const fileName = `${Date.now()}-${originalname}`;
-    const fileUrl = await this.ossService.uploadFile(fileName, buffer);
+    const fileUrl = await this.ossService.uploadFile(
+      fileName,
+      buffer,
+      mimetype,
+    );
     return { url: fileUrl, fileName };
   }
 }
