@@ -15,11 +15,16 @@ import { WorkService } from './work.service';
 import { CreateWorkDto } from './dto/create-Work.dto';
 import { UpdateWorkDto } from './dto/update-Work.dto';
 import { Work } from './schemas/work.schema';
+import { AbilityService } from '../casl/casl-ability.factory';
+import { Ability } from '@casl/ability';
 
 @ApiTags('Work')
 @Controller('Work')
 export class WorkController {
-  constructor(private readonly workService: WorkService) {}
+  constructor(
+    private readonly workService: WorkService,
+    private readonly abilityService: AbilityService,
+  ) {}
 
   @Get()
   async findAll(
@@ -39,6 +44,9 @@ export class WorkController {
 
   @Post()
   create(@Body() createWorkDto: CreateWorkDto, @Request() req): Promise<Work> {
+    const ability: Ability = this.abilityService.defineUserAbilities(req.user);
+    console.log('ability', ability.can('create', 'Post'));
+
     return this.workService.create(createWorkDto, req.user);
   }
 

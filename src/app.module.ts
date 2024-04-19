@@ -4,12 +4,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { WorkModule } from './work/work.module';
+import { CaslModule } from './casl/casl.module';
+import { OssModule } from './oss/oss.module';
 
 @Module({
   imports: [
-    AuthModule,
-    UserModule,
-    WorkModule,
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath:
@@ -27,6 +26,11 @@ import { WorkModule } from './work/work.module';
         };
       },
     }),
+    AuthModule,
+    UserModule,
+    WorkModule,
+    CaslModule,
+    OssModule,
   ],
 })
 export class AppModule {}
