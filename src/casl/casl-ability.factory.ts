@@ -1,39 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import {
-  InferSubjects,
-  Ability,
-  AbilityBuilder,
-  AbilityClass,
-  ExtractSubjectType,
-} from '@casl/ability';
+import { AbilityBuilder, createMongoAbility } from '@casl/ability';
 import { Action } from './action.enum';
-import { Work } from '../work/schemas/work.schema';
-import { User } from '../user/schemas/user.schema';
-
-type Subjects = InferSubjects<typeof Work | typeof User> | 'all';
-
-export type AppAbility = Ability<[Action, Subjects]>;
+import { UserEnum } from '@/user/dto/user.enum';
+import { User } from '@/user/schemas/user.schema';
 
 @Injectable()
 export class AbilityService {
   defineUserAbilities(user: User) {
-    const { can, cannot, build } = new AbilityBuilder<
-      Ability<[Action, Subjects]>
-    >(Ability as AbilityClass<AppAbility>);
+    const { can, cannot, build } = new AbilityBuilder(createMongoAbility);
 
-    if (user.role === 'admin') {
-      can(Action.Manage, 'all'); // read-write access to everything
+    if (user.role === UserEnum.Admin) {
+      can(Action.Manage, 'all');
     } else {
-      can(Action.Read, 'all'); // read-only access to everything
+      // 可编辑的字段
+      const UserEditableFields = ['password', 'nickName', 'portrait'];
+      can(Action.Update, 'User', UserEditableFields, { _id: user._id });
+      can(Action.Delete, 'User', { _id: user._id });
+
+      // 用户只能编辑自己的作品
+      can(Action.Update, 'Work', { userId: user._id });
+      can(Action.Delete, 'Work', { userId: user._id });
     }
 
-    can(Action.Update, Work, { userId: user.id });
-    cannot(Action.Delete, Work, { isPublished: true });
-
-    return build({
-      // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
-      detectSubjectType: (item) =>
-        item.constructor as ExtractSubjectType<Subjects>,
-    });
+    return build();
   }
 }

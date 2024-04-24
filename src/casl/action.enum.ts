@@ -5,3 +5,8 @@ export enum Action {
   Update = 'update',
   Delete = 'delete',
 }
+
+export enum Method {
+  PUT = 'update',
+  DELETE = 'delete',
+}

@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import { Work, WorkDocument } from './schemas/work.schema';
 import { CreateWorkDto } from './dto/create-work.dto';
 import { UpdateWorkDto } from './dto/update-work.dto';
-import { User } from '../user/schemas/user.schema';
+import { User } from '@/user/schemas/user.schema';
 
 @Injectable()
 export class WorkService {

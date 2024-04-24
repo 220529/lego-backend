@@ -7,6 +7,7 @@ import {
   IsEmail,
   IsIn,
 } from 'class-validator';
+import { UserEnum } from './user.enum';
 
 /**
  * 用户 创建 DTO，主要用于创建的数据传输对象
@@ -54,6 +55,7 @@ export class CreateUserDto {
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  @IsIn(['admin', 'normal'])
+  @IsNotEmpty()
+  @IsIn([UserEnum.Admin, UserEnum.Normal])
   readonly role: string;
 }

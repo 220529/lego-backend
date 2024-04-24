@@ -1,19 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppModule } from './app.module';
-import { TransformInterceptor } from './global/transform.interceptor';
+import { AppModule } from '@/app.module';
+import { HttpExceptionFilter } from '@/filter/http-exception.filter';
+import { TransformInterceptor } from '@/global/transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  // 异常过滤器
+  app.useGlobalFilters(new HttpExceptionFilter());
+  // 响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
 
   const options = new DocumentBuilder().build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(3000);
+  await app.listen(3302);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

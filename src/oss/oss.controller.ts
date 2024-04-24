@@ -8,7 +8,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { OssService } from './oss.service';
 
-@ApiTags('Work')
+@ApiTags('oss')
 @Controller('oss')
 export class OssController {
   constructor(private readonly ossService: OssService) {}

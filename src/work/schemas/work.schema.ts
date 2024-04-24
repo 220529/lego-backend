@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Schema as MongooseSchema, ObjectId } from 'mongoose';
-import { User } from '../../user/schemas/user.schema';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 
 /**
  * 定义作品文档

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from './auth/auth.module';
-import { UserModule } from './user/user.module';
-import { WorkModule } from './work/work.module';
-import { CaslModule } from './casl/casl.module';
-import { OssModule } from './oss/oss.module';
+import { AuthModule } from '@/auth/auth.module';
+import { UserModule } from '@/user/user.module';
+import { WorkModule } from '@/work/work.module';
+import { CaslModule } from '@/casl/casl.module';
+import { OssModule } from '@/oss/oss.module';
 
 @Module({
   imports: [
@@ -27,9 +27,9 @@ import { OssModule } from './oss/oss.module';
       },
     }),
     AuthModule,
+    CaslModule,
     UserModule,
     WorkModule,
-    CaslModule,
     OssModule,
   ],
 })

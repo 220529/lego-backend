@@ -3,14 +3,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { WorkService } from './work.service';
 import { WorkController } from './work.controller';
 import { Work, WorkSchema } from './schemas/work.schema';
-import { CaslModule } from '../casl/casl.module';
 
 @Module({
   imports: [
-    CaslModule,
     MongooseModule.forFeature([{ name: Work.name, schema: WorkSchema }]),
   ],
   controllers: [WorkController],
   providers: [WorkService],
+  exports: [WorkService], // 需要被其他模块使用的服务，必须要导出
 })
 export class WorkModule {}
