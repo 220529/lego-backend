@@ -12,6 +12,8 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   // 响应拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
+  // 添加 /api 前缀
+  app.setGlobalPrefix('api');
 
   const options = new DocumentBuilder().build();
   const document = SwaggerModule.createDocument(app, options);
