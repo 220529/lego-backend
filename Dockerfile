@@ -7,5 +7,5 @@ RUN npm i
 # 构建项目
 COPY . /lego-backend
 RUN npm run build
-EXPOSE 3000
+EXPOSE 3302
 CMD npm run start:prod

@@ -14,4 +14,4 @@ services:
     depends_on:
       - mongo
     ports:
-      - 9005:3000
+      - 9005:3302
