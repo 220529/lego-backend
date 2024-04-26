@@ -12,8 +12,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { WorkService } from './work.service';
-import { CreateWorkDto } from './dto/create-Work.dto';
-import { UpdateWorkDto } from './dto/update-Work.dto';
+import { CreateWorkDto } from './dto/create-work.dto';
+import { UpdateWorkDto } from './dto/update-work.dto';
 import { Work } from './schemas/work.schema';
 
 @ApiTags('Work')
