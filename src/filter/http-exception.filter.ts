@@ -30,7 +30,7 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
 
     // 构建返回的响应体
     const responseBody = {
-      ...content,
+      data: content,
       state: 0,
       path: request.url,
       timestamp: new Date().toISOString(),

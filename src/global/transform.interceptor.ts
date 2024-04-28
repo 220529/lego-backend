@@ -13,7 +13,7 @@ export class TransformInterceptor implements NestInterceptor {
     return next.handle().pipe(
       map((content) => {
         return {
-          content,
+          data: content,
           code: 200,
           message: '请求成功',
           state: 1,
