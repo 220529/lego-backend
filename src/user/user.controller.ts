@@ -55,14 +55,14 @@ export class UserController {
     return this.userService.update(id, updateUserDto);
   }
 
+  @Get('/info')
+  findUser(@Request() req): Promise<User> {
+    return this.userService.findOne(req.user._id);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string): Promise<User> {
     return this.userService.findOne(id);
-  }
-
-  @Get('info')
-  findUser(@Request() req): Promise<User> {
-    return this.userService.findOne(req.user._id);
   }
 
   @Delete(':id')
