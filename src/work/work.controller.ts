@@ -16,8 +16,8 @@ import { CreateWorkDto } from './dto/create-work.dto';
 import { UpdateWorkDto } from './dto/update-work.dto';
 import { Work } from './schemas/work.schema';
 
-@ApiTags('Work')
-@Controller('Work')
+@ApiTags('work')
+@Controller('work')
 export class WorkController {
   constructor(private readonly workService: WorkService) {}
 

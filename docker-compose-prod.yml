@@ -9,9 +9,15 @@ services:
       - ./mongo-entrypoint/:/docker-entrypoint-initdb.d/
     env_file:
       - .env
+    networks:
+      - lego-network
   backend:
     image: registry.cn-beijing.aliyuncs.com/kaixinliu/lego-backend:{{IMAGE_TAG}}
     depends_on:
       - mongo
     ports:
       - 9005:3302
+    networks:
+      - lego-network
+networks:
+  lego-network:
