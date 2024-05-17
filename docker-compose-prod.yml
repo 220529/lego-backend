@@ -26,7 +26,7 @@ services:
     ports:
       - 81:80
     volumes:
-      - ./lego.api.conf:/etc/nginx/conf.d/lego.api.conf
+      - ./conf.d:/etc/nginx/conf.d
     networks:
       - lego-network
 networks:
