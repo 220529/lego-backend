@@ -65,7 +65,7 @@ jobs:
         run: |
           mkdir lego-backend
           cp .env docker-compose-prod.yml lego-backend
-          cp -r mongo-entrypoint conf.d lego-backend
+          cp -r mongo-entrypoint sites lego-backend
 
       - name: 将配置文件夹copy到ssh
         uses: appleboy/scp-action@v0.1.7
