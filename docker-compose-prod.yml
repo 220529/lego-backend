@@ -19,5 +19,15 @@ services:
       - 9005:3302
     networks:
       - lego-network
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./lego.api.conf:/etc/nginx/conf.d/lego.api.conf
+    networks:
+      - lego-network
 networks:
   lego-network:
