@@ -24,7 +24,7 @@ services:
     container_name: nginx
     restart: always
     ports:
-      - 80:80
+      - 81:80
     volumes:
       - ./lego.api.conf:/etc/nginx/conf.d/lego.api.conf
     networks:
