@@ -3,7 +3,11 @@ FROM node:18-alpine
 WORKDIR /lego-backend
 # 下载依赖
 COPY package.json package-lock.json /lego-backend
-RUN npm i
+# RUN npm i
+# 使用淘宝的 npm 镜像并增加超时时间，然后安装依赖
+RUN npm config set registry https://registry.npmmirror.com \
+    && npm config set fetch-timeout 60000 \
+    && npm install
 # 构建项目
 COPY . /lego-backend
 RUN npm run build
