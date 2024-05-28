@@ -26,7 +26,7 @@ services:
     ports:
       - 81:80
     volumes:
-      - ./sites/:/etc/nginx/sites-enabled/
+      - ./conf.d:/etc/nginx/conf.d
     networks:
       - lego-network
 networks:
